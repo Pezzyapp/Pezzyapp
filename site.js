@@ -13,8 +13,10 @@
 
   function uygula() {
     kilit = true;
-    secs.forEach(function (d, i) {
-      d.open = dar.matches ? i === 0 : true;
+    // Dar ekranda HEPSİ kapalı: ekranda düzgün bir başlık listesi dursun,
+    // dokununca açılsın. (İlkini açık bırakmak listeyi bozuyordu.)
+    secs.forEach(function (d) {
+      d.open = !dar.matches;
     });
     kilit = false;
   }
