@@ -5,7 +5,7 @@
  * Palet tokens.css'ten gelir (uygulamanın theme.ts'inden türetildi).
  */
 
-@import url("tokens.css?v=3");
+@import url("tokens.css?v=4");
 
 html, body { overflow-x: clip; }
 
@@ -104,7 +104,7 @@ h1, h2, h3 {
   height: 100svh;
   min-height: 30rem;
   overflow: hidden;
-  background: var(--color-scene-bottom);
+  background: var(--color-scene-edge);
 }
 
 .scene__art {
@@ -200,12 +200,14 @@ h1, h2, h3 {
   isolation: isolate;
   color: var(--color-ink);
   background:
+    /* Üst uç tablonun kenar rengiyle başlar (ek görünmesin), sonra
+       velvet.mid'e erir — sayfa Pezzy'nin moruna döner, kahverengiye değil */
     linear-gradient(
       to bottom,
-      var(--color-scene-bottom) 0%,
-      color-mix(in oklab, var(--color-scene-bottom) 86%, transparent) 14%,
-      color-mix(in oklab, var(--color-scene-bottom) 74%, transparent) 45%,
-      color-mix(in oklab, var(--color-scene-bottom) 88%, transparent) 100%
+      var(--color-scene-edge) 0%,
+      color-mix(in oklab, var(--color-scene-bottom) 88%, transparent) 16%,
+      color-mix(in oklab, var(--color-scene-bottom) 76%, transparent) 45%,
+      color-mix(in oklab, var(--color-scene-bottom) 90%, transparent) 100%
     ),
     url("/assets/bulut.jpg") center top / cover no-repeat,
     var(--color-scene-bottom);

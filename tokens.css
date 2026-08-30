@@ -9,31 +9,36 @@
 
 :root {
   /* ---- Renk · kadife gece -------------------------------------------- */
-  --color-paper:       oklch(12% 0.022 350);   /* velvet.deep  #150610 */
-  --color-paper-2:     oklch(17% 0.030 348);   /* velvet.mid   #260C20 */
-  --color-paper-3:     oklch(23% 0.042 345);   /* velvet.top   #3A1230 */
+  /* Değerler uygulamadaki src/theme.ts ile BİREBİR aynı — yaklaşık OKLCH
+     karşılıkları kullanılıyordu, yan yana konunca fark ediliyordu. */
+  --color-paper:       #150610;   /* velvet.deep */
+  --color-paper-2:     #260C20;   /* velvet.mid  */
+  --color-paper-3:     #3A1230;   /* velvet.top  */
 
-  --color-ink:         oklch(95% 0.012 25);    /* krem  #F7EFE8 */
+  --color-ink:         #F7EFE8;   /* velvet.cream */
   --color-ink-2:       oklch(78% 0.014 25);
   --color-muted:       oklch(63% 0.018 350);
 
   --color-rule:        oklch(30% 0.030 348);
   --color-rule-2:      oklch(22% 0.026 348);
 
-  --color-accent:      oklch(62% 0.135 350);   /* gül   #C4548A */
-  --color-accent-deep: oklch(46% 0.120 345);   /* erik  #8E3A6B */
+  --color-accent:      #C4548A;   /* velvet.rose */
+  --color-accent-deep: #8E3A6B;   /* velvet.plum */
   --color-accent-ink:  oklch(97% 0.010 25);    /* accent dolgu üstü metin */
-  --color-gold:        oklch(88% 0.055 90);    /* altın #EBD9AE — ordinal işaretler */
+  --color-gold:        #EBD9AE;   /* velvet.gold */
   --color-focus:       oklch(70% 0.190 350);
 
-  /* Tablonun EN ALT kenarindan ornekleneN renk. Sayfanin geri kalani bununla
-     devam eder; degistirirsen gorselle sayfa arasinda ek cizgisi olusur. */
-  --color-scene-bottom: #290e0e;
+  /* İKİSİ AYRI İŞ GÖRÜR — karıştırma:
+     scene-edge  = tablonun en alt kenarından örneklenen renk. Birleşme
+                   noktasında bu kullanılır, yoksa ek çizgisi görünür.
+     scene-bottom = sayfanın devam rengi (velvet.mid). Geçiş, edge'den
+                   bunun içine erir. */
+  --color-scene-edge:   #290E0E;
+  --color-scene-bottom: #260C20;   /* velvet.mid */
 
   /* ---- Tipografi ------------------------------------------------------ */
   --font-display:  "Bodoni Moda", ui-serif, Georgia, "Times New Roman", serif;
-  --font-body:     "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-outlier:  "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  --font-body:     Helvetica, "Helvetica Neue", Arial, sans-serif;
 
   /* 1.25 majör üçlü, 16px tabandan */
   --text-xs:   0.64rem;
