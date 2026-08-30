@@ -408,12 +408,15 @@ body.inner-page {
 /* Metnin kendisi — ferah, okunur */
 .doc { font-size: clamp(1rem, 1.1vw, 1.1rem); }
 .doc > h2:first-of-type { margin-top: 0; }
+/* Bölüm başlıkları gövde fontunda: bunlar display tipografi değil,
+   okunacak metnin parçası. Koyu zeminde 11 tane alt alta Bodoni ince
+   ve yorucu duruyordu. Sayfa başlığı (h1) serif kalıyor. */
 .doc h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
   color: var(--color-ink);
   margin-block: clamp(var(--space-2xl), 5vw, var(--space-3xl)) var(--space-md);
   scroll-margin-top: var(--space-xl);
@@ -486,7 +489,9 @@ body.inner-page {
   }
   .sec summary h2 {
     margin: 0;
-    font-size: clamp(1.15rem, 4.6vw, 1.5rem);
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0;
   }
   /* Açılma göstergesi */
   .sec summary::after {
