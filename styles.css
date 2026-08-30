@@ -1,0 +1,483 @@
+/* Pezzy — pezzyapp.com
+ *
+ * Yapı: tam ekran panellerin arka arkaya geldiği tek akış.
+ * Görsel panel → ifade paneli → görsel panel. Referans buydu.
+ * Palet tokens.css'ten gelir (uygulamanın theme.ts'inden türetildi).
+ */
+
+@import url("tokens.css?v=3");
+
+html, body { overflow-x: clip; }
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.shell {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* ================================================================ üst bar */
+
+.topbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  justify-content: space-between;   /* logo solda, sekmeler sağda */
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--page-gutter);
+}
+
+.topnav {
+  display: flex;
+  gap: clamp(var(--space-md), 2.4vw, var(--space-xl));
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+}
+.topnav a {
+  white-space: nowrap;
+  opacity: 0.75;
+  transition: opacity var(--dur-micro) var(--ease-out);
+}
+.topnav a:hover, .topnav a[aria-current="page"] { opacity: 1; }
+
+@media (max-width: 46rem) {
+  /* Dar ekranda tek satıra sığmıyor — logo üstte, sekmeler altında */
+  .topbar {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding-block: var(--space-md);
+  }
+  .topnav { justify-content: center; font-size: var(--text-xs); gap: var(--space-md); }
+}
+.topbar--page { position: static; }
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+/* ================================================== sahne (tablo / hero) */
+/* Tablo HER ZAMAN tek ekran yüksekliğinde. Geniş ekranda yatay, dar ekranda
+   dikey sürüm yüklenir (picture). Eskiden dikey tabloyu genişliğe göre
+   ölçekliyordum; 1920px'te 3400px yüksekliğe çıkıp her şeyi dağıtıyordu. */
+
+.scene {
+  position: relative;
+  height: 100svh;
+  min-height: 30rem;
+  overflow: hidden;
+  background: var(--color-scene-bottom);
+}
+
+.scene__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+/* Açık gökyüzünün üstünde KOYU yazı — krem burada 1.7:1, okunmuyor */
+.scene__type {
+  position: absolute;
+  left: 0; right: 0;
+  /* Kadının başını kapatmasın diye yukarı alındı (önce %26) */
+  top: 20%;
+  padding-inline: var(--page-gutter);
+  text-align: center;
+  color: var(--color-paper-3);
+}
+.scene__type .kicker {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.7rem);
+  opacity: 0.85;
+  margin-bottom: var(--space-2xs);
+}
+.scene__type h1 {
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+/* Açık gökyüzünün üstünde üst bar koyu olmalı — krem burada okunmuyor */
+.topbar--onLight .wordmark,
+.topbar--onLight .topnav a { color: var(--color-paper-3); }
+
+/* Alt şerit koyu bulutların üstünde: krem */
+.scene__foot {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  padding: var(--space-lg) var(--page-gutter);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+.scene__foot nav { display: flex; gap: var(--space-lg); flex-wrap: wrap; }
+.scene__foot a { white-space: nowrap; opacity: 0.85; }
+.scene__foot a:hover { opacity: 1; }
+
+@media (max-width: 44rem) {
+  /* Dikey tabloda açık gökyüzü melekler ile ufuk arasında — yazı oraya oturur */
+  .scene__type { top: 37%; }
+  .scene__foot { justify-content: center; font-size: var(--text-xs); }
+}
+
+/* ================================================================= düğme */
+
+.pill {
+  display: inline-block;
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-xl);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transition: background-color var(--dur-micro) var(--ease-out),
+              color var(--dur-micro) var(--ease-out),
+              transform var(--dur-micro) var(--ease-out);
+}
+.pill:hover { background: var(--color-ink); color: var(--color-scene-bottom); }
+.pill:active { transform: translateY(1px); }
+.scene__type--top .pill:hover { background: var(--color-paper-3); color: var(--color-ink); }
+
+/* ============================================================ adımlar */
+/* Kutu yok, çerçeve yok, çizgi yok — sadece tipografi. */
+
+/* Tablonun devamı. Metin düz zeminde değil, bulutların üstünde durur.
+   Üstteki degrade, sahnenin alt kenar rengiyle başlayıp buluta karışır —
+   böylece iki görsel arasında ek çizgisi görünmez. */
+.after {
+  position: relative;
+  isolation: isolate;
+  color: var(--color-ink);
+  background:
+    linear-gradient(
+      to bottom,
+      var(--color-scene-bottom) 0%,
+      color-mix(in oklab, var(--color-scene-bottom) 86%, transparent) 14%,
+      color-mix(in oklab, var(--color-scene-bottom) 74%, transparent) 45%,
+      color-mix(in oklab, var(--color-scene-bottom) 88%, transparent) 100%
+    ),
+    url("/assets/bulut.jpg") center top / cover no-repeat,
+    var(--color-scene-bottom);
+}
+
+/* Her bölüm bir tam ekran: giriş → dört adım → kapanış */
+/* Bu iki bölüm .shell'in 72rem sınırını aşar — 16:9'da alan boşa gitmesin */
+.steps-panel, .finale { max-width: 86rem; }
+
+.steps-panel {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(var(--space-2xl), 7vw, var(--space-3xl));
+  text-align: center;
+}
+.steps-panel .lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.9rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+  margin: 0 auto clamp(var(--space-2xl), 7vw, var(--space-4xl));
+}
+.steps-panel .lead b { font-weight: 700; }
+.steps-panel .eyebrow {
+  font-size: var(--text-sm);
+  letter-spacing: 0.24em;
+  color: var(--color-gold);
+  margin-bottom: clamp(var(--space-lg), 3vw, var(--space-2xl));
+}
+
+.steps-list {
+  display: grid;
+  gap: clamp(var(--space-xl), 4vw, var(--space-2xl));
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+/* Gizlilik ve indirme yan yana — sayfayı gereksiz uzatmıyor */
+/* Kapanış ekranı: yasal onay + iOS bilgisi + künye, hepsi tek ekranda */
+/* Üstteki blok boş alanın ortasında, künye ekranın dibinde —
+   eskiden ikisi üst üste yığılıp altta koca boşluk kalıyordu. */
+.finale {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding-block: clamp(var(--space-2xl), 6vw, var(--space-3xl));
+  text-align: center;
+}
+.finale .duo { align-self: center; }
+.duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(var(--space-xl), 5vw, var(--space-2xl));
+  text-align: center;
+}
+.duo h3 { font-size: clamp(1.5rem, 3.4vw, 2.4rem); margin-bottom: var(--space-md); }
+.duo p { color: var(--color-ink-2); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.65; max-width: 40ch; margin-inline: auto; }
+.duo .pill { margin-top: var(--space-md); }
+
+@media (min-width: 46rem) {
+  .duo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-3xl); }
+
+  /* Yatayda dört adım yan yana. Görseller kalkınca sütunlar genişleyebildi —
+     eskiden 226px'e sıkışıp yazılar okunmayacak kadar küçülüyordu. */
+  .steps-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(var(--space-lg), 3.4vw, var(--space-2xl));
+    max-width: 86rem;
+    align-items: start;
+  }
+  .step h3 { font-size: clamp(1.6rem, 2.5vw, 2.3rem); margin-bottom: var(--space-sm); }
+  .step p { font-size: clamp(1rem, 1.15vw, 1.15rem); line-height: 1.75; max-width: 30ch; }
+  .step__n { font-size: var(--text-base); margin-bottom: var(--space-sm); }
+
+  /* Kapanışta iki blok arası daha rahat */
+  .duo { gap: clamp(var(--space-3xl), 8vw, var(--space-4xl)); }
+}
+
+/* Yasal onay satırı — OkCupid tarzı, ama yalnızca gerçekten var olan
+   belgelere bağlanır. Çerez politikamız yok, o yüzden geçmiyor. */
+.consent {
+  margin-top: clamp(var(--space-xl), 5vw, var(--space-2xl));
+  max-width: 52ch;
+  margin-inline: auto;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+.consent a { border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 35%, transparent); }
+.consent a:hover { color: var(--color-ink); border-color: var(--color-ink); }
+
+/* ============================================================== altbilgi */
+
+.foot {
+  border-top: 1px solid var(--color-rule-2);
+  margin-top: 0;
+  padding-top: var(--space-xl);
+  text-align: center;
+  font-size: var(--text-sm);
+  /* muted (oklch 63%) bulutun açık yerinde 2.76:1 kalıyordu — ink-2 ile 5.5:1 */
+  color: var(--color-ink-2);
+}
+.foot nav { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm) var(--space-lg); margin-bottom: var(--space-md); }
+.foot nav a { white-space: nowrap; }
+.foot nav a:hover, .foot p a:hover { color: var(--color-ink); }
+.foot p { max-width: 60ch; margin-inline: auto; line-height: 1.7; }
+.foot p a { border-bottom: 1px solid var(--color-rule); }
+.foot__legal { margin-top: var(--space-md); }
+
+/* ============================================================ iç sayfalar */
+
+body.inner-page {
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-scene-bottom) 84%, transparent) 0%,
+      color-mix(in oklab, var(--color-scene-bottom) 92%, transparent) 100%
+    ),
+    url("/assets/bulut.jpg") center top / cover no-repeat fixed,
+    var(--color-scene-bottom);
+}
+
+.page-head {
+  padding: var(--space-lg) var(--page-gutter) clamp(var(--space-xl), 5vw, var(--space-2xl));
+}
+/* Başlık da ortalanır — sitenin geri kalanı ortalı, sola yaslı başlık
+   aşağıdaki ortalanmış blokla hizasız duruyordu. */
+.page-head .inner {
+  width: 100%; max-width: 86rem; margin-inline: auto;
+  padding-top: clamp(var(--space-2xl), 6vw, var(--space-3xl));
+  text-align: center;
+}
+.page-head h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  max-width: 22ch;
+  margin-inline: auto;
+}
+.page-head .sub {
+  margin-top: var(--space-sm);
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+}
+
+/* Uzun metin + solda yapışkan içindekiler */
+/* Blok bir bütün olarak ortalanır; metin sütunu tam ölçüsünde, yanında
+   ölü alan bırakmaz. Eskiden 864px sütunun içinde 697px metin vardı ve
+   sağda 167px boşluk kalıyordu — asimetri oradan geliyordu. */
+.doc-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 38rem);
+  justify-content: center;
+  gap: clamp(var(--space-xl), 4vw, var(--space-2xl));
+  max-width: 86rem;
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  padding-block: clamp(var(--space-xl), 4vw, var(--space-2xl)) clamp(var(--space-3xl), 8vw, var(--space-4xl));
+}
+
+@media (min-width: 60rem) {
+  .doc-wrap {
+    grid-template-columns: 15rem minmax(0, 38rem);
+    gap: var(--space-3xl);
+    justify-content: center;
+  }
+  .toc { position: sticky; top: var(--space-xl); align-self: start; max-height: calc(100svh - var(--space-3xl)); overflow-y: auto; }
+}
+
+.toc { font-size: var(--text-sm); }
+.toc__label {
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+  font-size: var(--text-xs);
+}
+.toc ol { list-style: none; counter-reset: t; display: grid; gap: var(--space-2xs); }
+.toc li { counter-increment: t; }
+.toc a {
+  display: block;
+  padding: var(--space-2xs) 0 var(--space-2xs) var(--space-lg);
+  position: relative;
+  color: var(--color-ink-2);
+  line-height: 1.45;
+  border-left: 1px solid var(--color-rule-2);
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+}
+.toc a::before {
+  content: counter(t);
+  position: absolute; left: var(--space-xs);
+  color: var(--color-gold);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+.toc a:hover { color: var(--color-ink); border-color: var(--color-accent); }
+
+/* Metnin kendisi — ferah, okunur */
+.doc { font-size: clamp(1rem, 1.1vw, 1.1rem); }
+.doc > h2:first-of-type { margin-top: 0; }
+.doc h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin-block: clamp(var(--space-2xl), 5vw, var(--space-3xl)) var(--space-md);
+  scroll-margin-top: var(--space-xl);
+}
+.doc h3 {
+  font-family: var(--font-body);
+  font-size: 1.05em;
+  font-weight: 700;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-2xs);
+}
+.doc p { color: var(--color-ink-2); line-height: 1.8; margin-bottom: var(--space-md); }
+.doc ul { list-style: none; margin-bottom: var(--space-lg); display: grid; gap: var(--space-xs); }
+.doc ul li {
+  position: relative;
+  padding-left: var(--space-lg);
+  color: var(--color-ink-2);
+  line-height: 1.75;
+}
+.doc ul li::before {
+  content: "";
+  position: absolute; left: 2px; top: 0.72em;
+  width: 6px; height: 1px;
+  background: var(--color-accent);
+}
+.doc ol { list-style: none; counter-reset: s; margin-block: var(--space-lg); display: grid; gap: var(--space-sm); }
+.doc ol li {
+  counter-increment: s;
+  position: relative;
+  padding-left: var(--space-xl);
+  color: var(--color-ink-2);
+  line-height: 1.75;
+}
+.doc ol li::before {
+  content: counter(s);
+  position: absolute; left: 0;
+  color: var(--color-gold);
+  font-variant-numeric: tabular-nums;
+}
+.doc a { border-bottom: 1px solid color-mix(in oklab, var(--color-accent) 70%, transparent); }
+.doc a:hover { color: var(--color-accent); }
+.doc b { color: var(--color-ink); }
+
+.callout {
+  border-left: 2px solid var(--color-gold);
+  background: color-mix(in oklab, var(--color-scene-bottom) 55%, transparent);
+  padding: var(--space-md) var(--space-md) var(--space-md) var(--space-lg);
+  border-radius: 0 10px 10px 0;
+  margin-block: var(--space-xl);
+}
+.callout p { margin: 0; }
+
+.pagenav {
+  border-top: 1px solid var(--color-rule-2);
+  padding-top: var(--space-lg);
+  margin-top: clamp(var(--space-2xl), 6vw, var(--space-3xl));
+  display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-lg);
+  font-size: var(--text-sm);
+}
+.pagenav a { white-space: nowrap; color: var(--color-ink-2); }
+.pagenav a:hover { color: var(--color-accent); }
+.pagenav a[aria-current="page"] { color: var(--color-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 120ms !important;
+    animation-duration: 120ms !important;
+  }
+}
