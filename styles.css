@@ -457,6 +457,54 @@ body.inner-page {
 .doc a:hover { color: var(--color-accent); }
 .doc b { color: var(--color-ink); }
 
+/* ---- Bölümler ---------------------------------------------------------
+   Geniş ekranda <details> hiç akordeon gibi görünmez: ok işareti yok,
+   imleç normal, hepsi açık. Dar ekranda açılır-kapanır listeye döner. */
+.sec summary {
+  list-style: none;
+  cursor: default;
+}
+.sec summary::-webkit-details-marker { display: none; }
+.sec summary::marker { content: ""; }
+.sec summary h2 { display: inline; }
+
+@media (max-width: 60rem) {
+  /* Dar ekranda ayrı içindekiler listesine gerek yok — başlıklar zaten liste */
+  .toc { display: none; }
+
+  .sec { border-top: 1px solid var(--color-rule-2); }
+  .sec:last-of-type { border-bottom: 1px solid var(--color-rule-2); }
+
+  .sec summary {
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sec summary h2 {
+    margin: 0;
+    font-size: clamp(1.15rem, 4.6vw, 1.5rem);
+  }
+  /* Açılma göstergesi */
+  .sec summary::after {
+    content: "";
+    flex: none;
+    width: 11px; height: 11px;
+    margin-top: 0.35em;
+    border-right: 1.5px solid var(--color-gold);
+    border-bottom: 1.5px solid var(--color-gold);
+    transform: rotate(45deg);
+    transition: transform var(--dur-short) var(--ease-out);
+  }
+  .sec[open] summary::after { transform: rotate(-135deg); }
+
+  .sec__body { padding-bottom: var(--space-lg); }
+  .sec__body > :last-child { margin-bottom: 0; }
+}
+
 .callout {
   border-left: 2px solid var(--color-gold);
   background: color-mix(in oklab, var(--color-scene-bottom) 55%, transparent);

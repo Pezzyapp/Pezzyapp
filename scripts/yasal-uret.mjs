@@ -58,12 +58,20 @@ const epostaLinkle = (s) =>
   s.replace(/([\w.+-]+@[\w-]+\.[\w.]+)/g, '<a href="mailto:$1">$1</a>');
 
 /** legal.ts govdesini HTML'e cevirir.
- *  "1. Baslik" -> h2 (id'li), "- madde" -> ul/li, digerleri -> p
+ *  "1. Baslik" -> yeni bolum (details/summary), "- madde" -> ul/li, digerleri -> p
+ *  Bolumler VARSAYILAN OLARAK ACIK uretilir: JS yoksa ve genis ekranda metnin
+ *  tamami gorunur kalir. Akordeon davranisini menu.js yalnizca dar ekranda kurar.
  *  Ayrica icindekiler icin baslik listesini dondurur. */
 function govdeyiHtmlYap(body) {
   const bloklar = body.trim().split(/\n\s*\n/);
-  const parcalar = [];
   const basliklar = [];
+  const girisParcalari = [];   // ilk basliktan onceki metin
+  const bolumler = [];         // { id, ad, parcalar }
+
+  const ekle = (html) => {
+    if (bolumler.length) bolumler[bolumler.length - 1].parcalar.push(html);
+    else girisParcalari.push(html);
+  };
 
   for (const blok of bloklar) {
     const satirlar = blok.split('\n').map((s) => s.trim()).filter(Boolean);
@@ -71,7 +79,7 @@ function govdeyiHtmlYap(body) {
 
     const listeyiBitir = () => {
       if (liste.length) {
-        parcalar.push('<ul>' + liste.map((t) => `<li>${t}</li>`).join('') + '</ul>');
+        ekle('<ul>' + liste.map((t) => `<li>${t}</li>`).join('') + '</ul>');
         liste = [];
       }
     };
@@ -84,17 +92,29 @@ function govdeyiHtmlYap(body) {
       } else if (/^\d+\.\s+\S/.test(satir)) {
         listeyiBitir();
         const id = 'b' + (basliklar.length + 1);
-        // İçindekilerde numarayı ayrıca gösteriyoruz, metinden düşür
         basliklar.push({ id, ad: satir.replace(/^\d+\.\s+/, '') });
-        parcalar.push(`<h2 id="${id}">${metin}</h2>`);
+        bolumler.push({ id, baslik: metin, parcalar: [] });
       } else {
         listeyiBitir();
-        parcalar.push(`<p>${metin}</p>`);
+        ekle(`<p>${metin}</p>`);
       }
     }
     listeyiBitir();
   }
-  return { html: parcalar.join('\n      '), basliklar };
+
+  const html = [
+    ...girisParcalari,
+    ...bolumler.map(
+      (b) => `<details class="sec" open>
+      <summary><h2 id="${b.id}">${b.baslik}</h2></summary>
+      <div class="sec__body">
+        ${b.parcalar.join('\n        ')}
+      </div>
+    </details>`
+    ),
+  ].join('\n      ');
+
+  return { html, basliklar };
 }
 
 const TOPBAR = `<header class="topbar">
@@ -143,7 +163,7 @@ function sayfaYap(anahtar) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=2">
 </head>
 <body class="inner-page">
 
@@ -178,6 +198,7 @@ function sayfaYap(anahtar) {
 
 ${FOOT}
 
+<script src="/site.js" defer></script>
 
 </body>
 </html>

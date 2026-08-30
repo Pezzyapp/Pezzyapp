@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=2">
 </head>
 <body class="inner-page">
 
@@ -45,26 +45,40 @@
   </aside>
 
   <article class="doc">
-    <h2 id="b1">Uygulama içinden</h2>
-    <ol>
+      
+      <details class="sec" open>
+      <summary><h2 id="b1">Uygulama içinden</h2></summary>
+      <div class="sec__body">
+        <ol>
       <li><b>Profilim</b> sekmesini aç.</li>
       <li><b>Ayarlar</b>'a gir.</li>
       <li><b>Hesabı sil</b>'e dokun ve onayla.</li>
     </ol>
-
-    <h2 id="b2">Silme işlemi neleri kapsar?</h2>
-    <p>Silme işlemi hesabını, profilini, yüklediğin fotoğrafları ve mesajlarını kapsar ve <b>geri alınamaz</b>. E-posta adresin de kayıtlardan düşer; dilersen aynı adresle yeniden kayıt olabilirsin.</p>
+      </div>
+    </details>
+      <details class="sec" open>
+      <summary><h2 id="b2">Silme işlemi neleri kapsar?</h2></summary>
+      <div class="sec__body">
+        <p>Silme işlemi hesabını, profilini, yüklediğin fotoğrafları ve mesajlarını kapsar ve <b>geri alınamaz</b>. E-posta adresin de kayıtlardan düşer; dilersen aynı adresle yeniden kayıt olabilirsin.</p>
 
     <div class="callout">
       <p>Yalnızca hakkında yapılmış kötüye kullanım şikayetlerine ilişkin kayıtlar, denetim yükümlülüğü gereği saklanmaya devam eder. Aksi halde bir kullanıcı hesabını silerek hakkındaki şikayetleri de silebilirdi.</p>
     </div>
-
-    <h2 id="b3">Uygulamaya erişemiyorsan</h2>
-    <p>Telefonunda uygulama yoksa veya hesabına giriş yapamıyorsan, hesabının kayıtlı olduğu e-posta adresinden bize yaz. Talebin en geç 30 gün içinde sonuçlandırılır.</p>
+      </div>
+    </details>
+      <details class="sec" open>
+      <summary><h2 id="b3">Uygulamaya erişemiyorsan</h2></summary>
+      <div class="sec__body">
+        <p>Telefonunda uygulama yoksa veya hesabına giriş yapamıyorsan, hesabının kayıtlı olduğu e-posta adresinden bize yaz. Talebin en geç 30 gün içinde sonuçlandırılır.</p>
     <p><a class="pill" href="mailto:pezzy@pezzyapp.com?subject=Hesap%20silme%20talebi">pezzy@pezzyapp.com</a></p>
-
-    <h2 id="b4">Diğer hakların</h2>
-    <p>Verilerine erişme, düzeltme, silme ve işlemeye itiraz etme hakkına sahipsin. Ayrıntılar <a href="/kvkk/">KVKK Aydınlatma Metni</a>'nde ve <a href="/gizlilik/">Gizlilik Politikası</a>'nda.</p>
+      </div>
+    </details>
+      <details class="sec" open>
+      <summary><h2 id="b4">Diğer hakların</h2></summary>
+      <div class="sec__body">
+        <p>Verilerine erişme, düzeltme, silme ve işlemeye itiraz etme hakkına sahipsin. Ayrıntılar <a href="/kvkk/">KVKK Aydınlatma Metni</a>'nde ve <a href="/gizlilik/">Gizlilik Politikası</a>'nda.</p>
+      </div>
+    </details>
 
     <nav class="pagenav" aria-label="Diğer sayfalar">
       <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
@@ -75,6 +89,8 @@
     </nav>
   </article>
 </main>
+
+<script src="/site.js" defer></script>
 
 </body>
 </html>

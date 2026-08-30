@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=2">
 </head>
 <body class="inner-page">
 
@@ -45,12 +45,18 @@
   </aside>
 
   <article class="doc">
-    <h2 id="b1">Bize ulaşın</h2>
-    <p>Gelen her mesaj okunur. Şikayetler en geç 24 saat içinde incelenir; diğer talepler en geç 30 gün içinde sonuçlandırılır.</p>
+      
+      <details class="sec" open>
+      <summary><h2 id="b1">Bize ulaşın</h2></summary>
+      <div class="sec__body">
+        <p>Gelen her mesaj okunur. Şikayetler en geç 24 saat içinde incelenir; diğer talepler en geç 30 gün içinde sonuçlandırılır.</p>
     <p><a class="pill" href="mailto:pezzy@pezzyapp.com">pezzy@pezzyapp.com</a></p>
-
-    <h2 id="b2">Şikayet ve engelleme</h2>
-    <p>Uygunsuz içeriğe ve tacize tolerans gösterilmez. Şikayet ve engelleme, her profilden ve her sohbetten erişilebilir.</p>
+      </div>
+    </details>
+      <details class="sec" open>
+      <summary><h2 id="b2">Şikayet ve engelleme</h2></summary>
+      <div class="sec__body">
+        <p>Uygunsuz içeriğe ve tacize tolerans gösterilmez. Şikayet ve engelleme, her profilden ve her sohbetten erişilebilir.</p>
     <ol>
       <li>Şikayet etmek istediğin kişinin profilini ya da onunla olan sohbeti aç.</li>
       <li>Sağ üstteki <b>“…”</b> düğmesine dokun.</li>
@@ -61,13 +67,18 @@
     <div class="callout">
       <p><b>Buluşurken.</b> Tanıştığın kişilerle kalabalık ve umuma açık yerlerde buluş, kimseye maddi destek gönderme, kimlik, banka veya şifre bilgilerini paylaşma. Hayati tehlike içeren bir durumda önce yetkili makamlara başvur.</p>
     </div>
-
-    <h2 id="b3">Hesabını silmek</h2>
-    <p>Hesabını istediğin an uygulama içinden silebilirsin. Adımlar ve silmenin kapsamı <a href="/hesap-silme/">hesap silme sayfasında</a>.</p>
-
-    <h2 id="b4">Sık sorulanlar</h2>
-
-    <h3>Kendimi biriyle eşleştirebilir miyim?</h3>
+      </div>
+    </details>
+      <details class="sec" open>
+      <summary><h2 id="b3">Hesabını silmek</h2></summary>
+      <div class="sec__body">
+        <p>Hesabını istediğin an uygulama içinden silebilirsin. Adımlar ve silmenin kapsamı <a href="/hesap-silme/">hesap silme sayfasında</a>.</p>
+      </div>
+    </details>
+      <details class="sec" open>
+      <summary><h2 id="b4">Sık sorulanlar</h2></summary>
+      <div class="sec__body">
+        <h3>Kendimi biriyle eşleştirebilir miyim?</h3>
     <p>Hayır. Pezzy'nin temel kuralı budur: hiç kimse kendini eşleştiremez. Seni hep başkaları yakıştırır.</p>
 
     <h3>Kimin beni yakıştırdığını görebilir miyim?</h3>
@@ -84,6 +95,8 @@
 
     <h3>Yaş sınırı var mı?</h3>
     <p>Pezzy 18 yaş ve üzeri içindir. 18 yaşından küçük olduğu tespit edilen hesaplar kapatılır ve verileri silinir.</p>
+      </div>
+    </details>
 
     <nav class="pagenav" aria-label="Diğer sayfalar">
       <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
@@ -94,6 +107,8 @@
     </nav>
   </article>
 </main>
+
+<script src="/site.js" defer></script>
 
 </body>
 </html>
