@@ -536,3 +536,66 @@ body.inner-page {
     animation-duration: 120ms !important;
   }
 }
+
+/* Eylül 2026: tipografik akış ve mobil okunabilirlik. */
+.topnav a { display: inline-flex; align-items: center; min-height: 44px; opacity: .9; }
+.scene__foot { align-items: flex-end; padding-bottom: 2rem; }
+.scene__intro { max-width: 30rem; }
+.scene__intro p { font-size: 1rem; letter-spacing: 0; }
+.scene__discover { display: inline-flex; align-items: center; gap: 1.5rem; min-height: 44px; font-size: .875rem; }
+.scene__discover span { color: var(--color-gold); font-size: 1.3rem; }
+.scene::after { content: ""; position: absolute; inset: auto 0 0; height: 22%; background: linear-gradient(transparent, var(--color-scene-edge)); pointer-events: none; }
+.scene__foot { z-index: 1; }
+.steps-panel { min-height: min(100svh, 56rem); padding-block: clamp(5rem, 8vw, 8rem); }
+.steps-panel .eyebrow, .section-label { font: 500 .75rem/1.5 var(--font-body); letter-spacing: .18em; color: var(--color-gold); margin-bottom: 1.5rem; }
+.steps-panel .lead { max-width: 27ch; font-size: clamp(1.9rem, 3.7vw, 3.4rem); margin-bottom: clamp(3rem, 5vw, 5rem); text-wrap: balance; }
+.steps-list { width: 100%; gap: 2rem; }
+.step { position: relative; text-align: left; }
+.step__n { display: block; color: var(--color-gold); font-size: .8125rem; letter-spacing: .12em; padding-bottom: 1.25rem; margin-bottom: 1.25rem; border-bottom: 1px solid color-mix(in srgb, var(--color-gold) 28%, transparent); }
+.step h3 { font-size: clamp(1.75rem, 2.6vw, 2.5rem); margin-bottom: 1rem; }
+.step p { font-size: 1.0625rem; line-height: 1.7; max-width: 29ch; color: var(--color-ink); }
+.finale { min-height: 0; padding-top: 1rem; padding-bottom: 2rem; }
+.finale .duo { padding-block: clamp(3rem, 6vw, 6rem); border-top: 1px solid color-mix(in srgb, var(--color-gold) 22%, transparent); text-align: left; gap: clamp(3rem, 8vw, 8rem); }
+.duo h2 { font-size: clamp(2rem, 3.2vw, 3rem); line-height: 1.12; margin-bottom: 1.25rem; text-wrap: balance; }
+.duo p { margin-inline: 0; max-width: 43ch; }
+.duo .section-label { font-size: .75rem; color: var(--color-gold); margin-bottom: 1.25rem; }
+.duo .pill { background: var(--color-ink); color: var(--color-paper-2); border-color: var(--color-ink); min-height: 48px; }
+.duo .pill:hover { background: var(--color-gold); border-color: var(--color-gold); }
+.foot { padding-block: 2rem 1rem; }
+.foot nav a { display: inline-flex; align-items: center; min-height: 36px; }
+body.inner-page { background: linear-gradient(color-mix(in srgb, var(--color-scene-bottom) 95%, transparent), var(--color-paper)), url('/assets/bulut.jpg') center top / cover no-repeat; }
+.inner-page .doc p, .inner-page .doc li { color: color-mix(in srgb, var(--color-ink) 90%, var(--color-paper)); }
+.page-head { padding-bottom: 1.5rem; }
+.doc-wrap { padding-top: 2rem; }
+@media (min-width: 60.001rem) {
+  .sec + .sec { margin-top: 2.5rem; }
+  .sec summary { margin-bottom: 1rem; }
+}
+@media (max-width: 60rem) and (min-width: 46.001rem) {
+  .steps-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+}
+@media (max-width: 46rem) {
+  .topbar { gap: 0; padding-top: 1rem; }
+  .topnav { font-size: .75rem; gap: clamp(.75rem, 3vw, 1.25rem); }
+  .wordmark { font-size: 1.8rem; }
+  .scene__type { top: 37%; }
+  .scene__foot { display: block; padding-bottom: 1rem; text-align: center; }
+  .scene__intro { margin-inline: auto; }
+  .scene__intro p { font-size: .8125rem; }
+  .scene__foot nav { justify-content: center; gap: 1rem; font-size: .6875rem; }
+  .scene__foot nav a { min-height: 32px; display: inline-flex; align-items: center; }
+  .steps-panel { padding-block: 4.5rem 3.5rem; }
+  .steps-panel .lead { font-size: clamp(1.8rem, 7.5vw, 2.6rem); margin-bottom: 3rem; }
+  .steps-list { gap: 0; max-width: 30rem; }
+  .step { padding: 0 0 2.5rem 3.5rem; border-left: 1px solid color-mix(in srgb, var(--color-gold) 25%, transparent); margin-left: 1rem; }
+  .step:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .step__n { position: absolute; left: -1rem; top: 0; width: 2rem; padding: .25rem 0; margin: 0; border: 0; text-align: center; background: var(--color-scene-bottom); }
+  .step h3 { font-size: 1.9rem; margin-bottom: .75rem; }
+  .step p { font-size: 1rem; max-width: none; }
+  .finale .duo { gap: 3rem; padding-block: 3rem; }
+  .duo h2 { font-size: 2.15rem; }
+  .foot nav { gap: .25rem 1rem; }
+  .page-head .inner { padding-top: 6rem; }
+  .doc-wrap { padding-top: 1rem; }
+  .sec { border-color: color-mix(in srgb, var(--color-gold) 20%, transparent); }
+}
